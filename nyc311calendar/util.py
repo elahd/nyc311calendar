@@ -15,11 +15,13 @@ def today() -> date:
     return datetime.now(ZoneInfo("America/New_York")).date()
 
 
-def date_mod(num_days: int, p_date: date = today()) -> date:
+def date_mod(num_days: int, p_date: date | None = None) -> date:
     """Adjust a date object by the specified number of days.
 
     Adjust a date object — not a datetime object — by the specified number of days. Returns a date object.
     """
+    if p_date is None:
+        p_date = today()
     return (
         datetime.combine(p_date, datetime.min.time()) + timedelta(days=num_days)
     ).date()
